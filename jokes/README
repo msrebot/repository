@@ -2,7 +2,7 @@
 
 Jokes application is implemented to support storing, reading, likeing and dislikeing jokes, for demo purposes.
 
-# User Manual
+## User Manual
 
 In order to run the application, it is required to have following in place:
   - JRE 8 installed
