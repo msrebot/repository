@@ -1,0 +1,37 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<table>
+        <tr>
+            <th>Id</th>
+            <th>Category</th>
+            <th>Content</th>
+            <th>Likes</th>
+            <th>Dislikes</th>
+            <th>Likes difference</th>
+            <th>Buttons</th>
+        </tr>
+        <tr th:each="joke, iter : ${jokes}" >
+	        	<td th:text="${iter.index} + 1"></td>
+	            <td th:text="${joke.category.name}"></td>
+	            <td th:text="${joke.content}"></td>
+	            <td th:text="${joke.likes}"></td>
+	            <td th:text="${joke.dislikes}"></td>
+	            <td th:text="${joke.likes} - ${joke.dislikes}"></td>
+	            <td>
+	            <form action="#" th:action="@{/inc}" th:object="${jokeId}" method="post">
+	            	<input type="hidden" th:value="${joke.id}" name="id"/>
+	            	<button type="submit">Like</button>
+	            </form>
+	            <form action="#" th:action="@{/dec}" th:object="${jokeId}" method="post">
+	            	<input type="hidden" th:value="${joke.id}" name="id"/>
+	            	<button type="submit">Dislike</button>
+	            </form>
+	            </td>
+        </tr>
+</table>
+<div th:if="${jokes.totalPages > 0}" th:each="pageNumber : ${pageNumbers}">
+    <a th:href="@{/jokes(size=${jokes.size}, page=${pageNumber} - 1)}" th:text=${pageNumber}></a>
+</div>
+</body>
+</html>
