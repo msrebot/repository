@@ -44,7 +44,7 @@ public class JokesController {
 	 * content, number of likes and dislikes, and difference between them. Also,
 	 * the view contains buttons to like and dislike the joke.
 	 */
-	@GetMapping("/jokes")
+	@GetMapping("/")
 	@Log(level = Level.INFO)
 	public String getJokes(@PageableDefault(value = 10, page = 0) Pageable pageable, Model model) {
 		Page<Joke> jokes = jokeService.getJokes(pageable);
@@ -66,7 +66,7 @@ public class JokesController {
 	 * End point to add a new joke. End point retrieves the view to 
 	 * submit category and content of the joke.
 	 */
-	@GetMapping("/joke")
+	@GetMapping("/new")
 	@Log(level = Level.INFO)
 	public String addJokeForm(Model model) {
 		model.addAttribute("categories", jokeService.getCategories());
@@ -85,7 +85,7 @@ public class JokesController {
 		if (bindingResult.hasErrors() == false) 		
 			jokeService.addJoke(jokeForm);
 		
-		return "redirect:/joke";
+		return "redirect:/new";
 	}
 	
 	/**
@@ -96,7 +96,7 @@ public class JokesController {
 	@Log(level = Level.INFO)
 	public String like(@ModelAttribute JokeId jokeId) {
 		jokeService.likeJoke(Integer.parseInt(jokeId.getId()));
-		return "redirect:/jokes";
+		return "redirect:/";
 	}
 	
 	/**
@@ -107,7 +107,7 @@ public class JokesController {
 	@Log(level = Level.INFO)
 	public String dislike(@ModelAttribute JokeId jokeId) {
 		jokeService.dislikeJoke(Integer.parseInt(jokeId.getId()));
-		return "redirect:/jokes";
+		return "redirect:/";
 	}
 	
 	/**
