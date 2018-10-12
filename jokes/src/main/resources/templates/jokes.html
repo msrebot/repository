@@ -3,7 +3,7 @@
 <body>
 <table>
         <tr>
-            <th>Id</th>
+            <th>#</th>
             <th>Category</th>
             <th>Content</th>
             <th>Likes</th>
@@ -31,7 +31,7 @@
         </tr>
 </table>
 <div th:if="${jokes.totalPages > 0}" th:each="pageNumber : ${pageNumbers}">
-    <a th:href="@{/jokes(size=${jokes.size}, page=${pageNumber} - 1)}" th:text=${pageNumber}></a>
+    <a th:href="@{/(size=${jokes.size}, page=${pageNumber} - 1)}" th:text=${pageNumber}></a>
 </div>
 </body>
 </html>
